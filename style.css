@@ -1,0 +1,241 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-weight: normal;
+  color: #444;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+header > div {
+  display: flex;
+  justify-content: space-between;
+  height: 80px;
+  line-height: 80px;
+}
+
+header .icon {
+  padding: 0 50px;
+  display: inline-block;
+  line-height: 80px;
+}
+
+.icon:hover {
+  cursor: pointer;
+}
+
+h1 {
+  font-size: 23px;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.explanation {
+  font-size: 12px;
+  line-height: 12px;
+  background-color:rgb(58, 58, 58);
+  color: white;
+  border-radius: 20px;
+  padding: 5px 10px;
+}
+
+.plus-btn {
+  font-size: 25px;
+}
+
+.add-ex, .all-trush-ex, .edit-ex, .trush-ex, .back-ex {
+  display: none;
+}
+
+.plus-btn:hover .add-ex {
+  display: inline;
+  position: absolute;
+  top: 65px;
+  left: 30px;
+}
+
+.all-trush-btn {
+  font-size: 20px;
+}
+
+.all-trush-btn:hover .all-trush-ex{
+  display: block;
+  position: absolute;
+  top: 65px;
+  right: 12px;
+}
+
+/* list tub */
+#list-tub {
+  display: flex;
+}
+
+#list-tub h2 {
+  font-size: 25px;
+  font-family: 'Quicksand', sans-serif;
+  height: 60px;
+  line-height: 60px; 
+  text-align: center;
+  width: 50%;
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
+}
+
+#list-tub h2:not(.active):hover {
+  background-color:#e2e2e259;
+  cursor: pointer;
+}
+
+#list-tub .active {
+  background-color:#e2e2e2;
+}
+
+/* list content */
+/* editボタン */
+.edit-btn {
+  position: relative;
+}
+
+.edit-btn:hover .edit-ex {
+  display: block;
+  position: absolute;
+  top: 30px;
+  left: 10px;
+}
+
+/* trushボタン */
+.trush-btn {
+  position: relative;
+}
+
+.trush-btn:hover .trush-ex {
+  display: block;
+  position: absolute;
+  top: 30px;
+}
+
+/* backボタン */
+.back-btn {
+  position: relative;
+}
+
+.back-btn:hover .back-ex {
+  display: block;
+  position: absolute;
+  top: 30px;
+}
+
+.list-content {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 20px;
+  border-bottom: 1px solid gray;
+}
+
+.con1 {
+  flex-basis: 10%;
+}
+
+.con2 {
+  flex-basis: 70%;
+}
+
+.con3 {
+  flex-basis: 10%;
+  text-align: right;
+}
+
+.con4 {
+  flex-basis: 10%;
+  text-align: center;
+}
+
+/* 追加機能 */
+#background {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,.8);
+  display: none;
+}
+
+.option {
+  background-color: white;
+  display: none;
+  border: 1px solid gray;
+  width: 55%;
+  margin: 30px auto;
+  padding: 30px 5%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+}
+
+#add-main, #edit-main {
+  text-align: center;
+  padding: 30px 0;
+}
+
+input {
+  resize: none;
+  width: 80%;
+  height: 30px;
+  line-height: 30px;
+  margin-top: 20px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.cross-btn {
+  font-size: 55px;
+  cursor: pointer;
+}
+
+#add-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn {
+  width: 70px;
+  height: 40px;
+  border-radius: 5px;
+  border-style: none;
+  cursor: pointer;
+}
+
+/* 削除機能 */
+#all-trush-option, #trush-option {
+  text-align: center;
+}
+
+.add-btn, .yes-btn {
+  background-color: rgb(37, 223, 0);
+  color: white;
+}
+
+.no-btn {
+  background-color: rgb(253, 31, 31);
+  margin-left: 30px;
+  color: white;
+}
+
+.yes-no-btn {
+  margin: 20px 0;
+}
+
+#trush-list {
+  border-bottom: 1px solid gray;
+  display: inline-block;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}

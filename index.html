@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>to do list</title>
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+
+    <link rel="icon" href="favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+      </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="container">
+      <!-- header -->
+      <header>
+        <div>
+          <i 
+            @click="addList()"
+            class="icon plus-btn fas fa-plus"
+          >
+            <p class="explanation add-ex">追加する</p>
+          </i>
+          <h1>my to do list</h1>
+          <i 
+            @click="allTrushButton()"
+            class="icon all-trush-btn far fa-trash-alt"
+          >
+            <p class="explanation all-trush-ex">全て削除する</p>
+          </i>
+        </div>
+      </header>
+      <section id="main-list">
+        <!-- list tub -->
+        <section id="list-tub">
+          <h2
+            :class="{active: activeTab === 'todo'}"
+            @click="activeTab = 'todo'"
+          >to do</h2>
+          <h2
+            :class="{active: activeTab === 'done'}"
+            @click="activeTab = 'done'" 
+          >done</h2>
+        </section>
+        <!-- list content -->
+        <section id="list-contents">
+          <!-- to-do-list -->
+          <ul
+            v-show="activeTab === 'todo'"
+            class="content"
+            id="to-do-content"
+          >
+            <li
+              class="list-content"
+              v-for="(list, index) in lists"
+              v-bind:key="index"
+            >
+              <i 
+                @click="moveList()"
+                class="icon con1 far fa-circle"
+              ></i>
+              <p class="con2">{{ list }}</p>
+              <!-- 編集機能 -->
+              <i 
+                @click="editList()"
+                class="icon con3 edit-btn fas fa-pencil-alt"
+                >
+                <p class="explanation edit-ex">編集する</p>
+              </i>
+              <section id="edit-option" class="option">
+                <div 
+                  @click="crossButton()"
+                  class="cross-btn"
+                >&times;</div>
+                <div id="edit-main">
+                  <h1>リストを編集してください</h1>
+                  <input
+                    v-model="toDoText"
+                    name="text" 
+                    id="add-text" 
+                    cols="30" 
+                    rows="10"
+                    maxlength="40"
+                    ></input>
+                </div>
+                <div id="add-footer">
+                  <p>おすすめ：30字以内<br>例：買い物、１日のタスク、仕事</p>
+                  <button
+                    @click="getNewList()"
+                    type="button"
+                    class="add-btn btn"
+                  >決定</button>
+                </div>
+              </section>
+              <!-- 削除機能 -->
+              <i 
+                @click="trushList(index)"
+                class="icon con4 trush-btn far fa-trash-alt trush-size"
+              >
+                <p class="explanation trush-ex">削除する</p>
+              </i>
+              <section id="trush-option" class="option">
+                <p>削除してもよろしいですか？</p>
+                <p id="trush-list">{{ toDoText }}</p>
+                <div class="yes-no-btn">
+                  <button
+                    @click="trushOne(index)"
+                    type="button"
+                    class="yes-btn btn"
+                  >はい</button>
+                  <button
+                    @click="notTrushOne()"
+                    type="button" 
+                    class="no-btn btn"
+                  >いいえ</button>
+                </div>
+              </section>
+            </li>
+          </ul>
+          <!-- done-list -->
+          <ul
+            v-show="activeTab === 'done'"
+            class="content"
+            id="done-content"
+          >
+            <li 
+              v-for="doneList in doneLists"
+              v-bind:key="doneList"
+              class="list-content"
+            >
+              <i class="icon con1 far fa-check-circle"></i>        
+              <p class="con2">{{ doneList }}</p>
+              <i class="icon back-btn con3 fas fa-undo">
+                <p class="explanation back-ex">to doに戻す</p>
+              </i>
+              <i class="icon con4 trush-btn far fa-trash-alt trush-size">
+                <p class="explanation trush-ex">削除する</p>
+              </i>
+            </li>
+          </ul>
+        </section>
+      </section>
+      <!-- 追加機能 -->
+      <div id="background"></div>
+      <section id="add-option" class="option">
+        <div 
+          @click="crossButton()"
+          class="cross-btn"
+        >&times;</div>
+        <div id="add-main">
+          <h1>to do リストに追加する</h1>
+          <input
+            v-model="toDoText"
+            name="text" 
+            id="add-text" 
+            cols="30" 
+            rows="10" 
+            placeholder="テキストを入力"
+            maxlength="40"
+            ></input>
+        </div>
+        <div id="add-footer">
+          <p>おすすめ：30字以内<br>例：買い物、１日のタスク、仕事</p>
+          <button 
+            @click="getList()"
+            type="button"
+            class="add-btn btn"
+          >追加</button>
+        </div>
+      </section>
+      <!-- すべて削除 -->
+      <section id="all-trush-option" class="option">
+        <p>全て削除してもよろしいですか？</p>
+        <div class="yes-no-btn">
+          <button 
+            @click="trushAll()"
+            type="button" 
+            class="all-yes-btn yes-btn btn"
+          >はい</button>
+          <button 
+            @click="allNo()"
+            type="button" 
+            class="all-no-btn no-btn btn"
+          >いいえ</button>
+        </div>
+        <p>注意：一度削除すると元に戻りません</p>
+      </section>
+    </div>
+    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
